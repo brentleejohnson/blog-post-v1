@@ -29,6 +29,7 @@ def fetch_users():
 
 users = fetch_users()
 
+
 def init_user_table():
     conn = sqlite3.connect('blog.db')
     print("Opened database successfully")
@@ -76,10 +77,12 @@ CORS(app)
 
 jwt = JWT(app, authenticate, identity)
 
+
 @app.route('/protected')
 @jwt_required()
 def protected():
     return '%s' % current_identity
+
 
 @app.route('/user-registration/', methods=["POST"])
 def user_registration():
@@ -123,7 +126,7 @@ def create_blog():
                            "date_created) VALUES(?, ?, ?)", (title, content, date_created))
             conn.commit()
             response["status_code"] = 201
-            response['description'] = "Blog post added succesfully"
+            response['description'] = "Blog post added successfully"
         return response
 
 
